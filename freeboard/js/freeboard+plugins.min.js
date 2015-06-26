@@ -4203,15 +4203,20 @@ $.extend(freeboard, jQuery.eventEmitter);
         var isOn = false;
         var onText = "ON";
         var offText = "OFF";
+        var styleText = "";
+        var styleElement = null;
+        var lastElement = null;
 
         function updateState() {
-            indicatorElement.toggleClass("on", isOn);
+            if (!styleElement) indicatorElement.toggleClass("on", isOn);
 
             stateElement.text(isOn ? onText : offText);
         }
 
         this.render = function (element) {
-            $(element).append(titleElement).append(indicatorElement).append(stateElement);
+            if (!!element) lastElement = element; else element = lastElement;
+            $(element).empty();
+            $(element).append(titleElement).append(styleElement || indicatorElement).append(stateElement);
         }
 
         this.onSettingsChanged = function (newSettings) {
@@ -4229,6 +4234,13 @@ $.extend(freeboard, jQuery.eventEmitter);
             }
             else if (settingName === "off_text") {
                 offText = newValue
+            }
+            else if (settingName === "style_element") {
+                if (styleText != newValue) {
+                    styleText = newValue
+                    styleElement = (!!newValue) ? $(newValue) : null
+                    this.render()
+                }
             }
 
             updateState();
@@ -4266,6 +4278,11 @@ $.extend(freeboard, jQuery.eventEmitter);
             {
                 name: "off_text",
                 display_name: "Off Text",
+                type: "calculated"
+            },
+            {
+                name: "style_element",
+                display_name: "Style Element",
                 type: "calculated"
             }
         ],
