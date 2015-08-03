@@ -160,7 +160,7 @@ var style_element = function (data, property) {
             , shades: (data.position === 0.0 ? blue : data.position === null ? yellow : green)
             , thermostats: ({ cool_only: blue, heat_only: red }[data.mode] || green)
             , air_conditioners: (data.powered ? blue : green)
-            , propane_tanks: (data.remaining == 1.0 ? blue : data.remaining > 0.66 ? green : data.remaining > 0.33 ? yellow : red)
+            , propane_tanks: (data.remaining == 0 ? red : data.remaining == 1 ? blue : data.remaining > 0.66 ? green : data.remaining > 0.33 ? yellow : red)
     }[data.object_type] || blue
 
     if (typeof property === 'undefined') return { color: color, shape: shape }
@@ -180,9 +180,8 @@ var style_element = function (data, property) {
             , smoke_detected: value && red
             , tamper_detected: value && red
             , vibration: value && yellow
-
             , battery: (value == 1.0 ? blue : value > 0.66 ? green : value > 0.33 ? yellow : red)
-            , remaining: (value == 1.0 ? blue : value > 0.66 ? green : value > 0.33 ? yellow : red)
+            , remaining: (value == 0 ? red : value == 1 ? blue : value > 0.66 ? green : value > 0.33 ? yellow : red)
             , brightness: false
             , co_severity: (value > 0) && red
             , humidity: false
