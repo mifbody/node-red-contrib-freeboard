@@ -54,11 +54,13 @@ var on_text = function (data, property) {
 
     if (!data) return ''
     text = {
-        buttons: ''
+              buttons: ''
             , garage_doors: 'OPEN'
-            , hubs: 'OK'
+            , hubs: (!data.update_needed ? 'OK' : 'UPDATE NEEDED')
             , linked_services: 'OK'
             , light_bulbs: (data.brightness == 1.0 ? '' : pct(data.brightness))
+            , binary_switches: 'ON'
+            , powerstrips: 'ON'
             , locks: 'LOCKED'
             , sensor_pods: 'PROPERTY?'
             , shades: (data.position == 1.0 ? 'OPEN' : pct(data.position))
@@ -68,7 +70,7 @@ var on_text = function (data, property) {
             , propane_tanks: 'OK'
     }[data.object_type] || 'ON'
     if (typeof property === 'undefined') return text
-    if ((typeof data[property] === 'undefined') || (data[property] === null)) return ''
+//    if ((typeof data[property] === 'undefined') || (data[property] === null)) return ''
 
     value = data[property]
     text = {
@@ -84,7 +86,7 @@ var on_text = function (data, property) {
             , smoke_detected: (value ? 'SMOKE DETECTED' : '')
             , tamper_detected: (value ? 'TAMPER DETECTED' : '')
             , vibration: (value ? 'VIBRATION' : '')
-
+            , powered: (value ? 'ON' : 'OFF')
             , battery: pct(value)
             , brightness: pct(value)
             , co_severity: pct(value)
