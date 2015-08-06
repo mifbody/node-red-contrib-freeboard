@@ -69,7 +69,7 @@ var on_text = function (data, property) {
             , thermostats: (data.cool_active ? 'COOL' : data.heat_active ? 'HEAT' : data.aux_active ? 'AUX' : data.fan_active ? 'FAN' : 'IDLE')
             , air_conditioners: (data.powered ? ('COOL to ' + (data.max_set_point.toFixed(1) + 'C / ' + ((data.max_set_point * 1.8) + 32).toFixed(1) + 'F')) : 'IDLE')
             , propane_tanks: 'OK'
-            , piggy_banks: 'Balance: ' + to_dollars(data.balance) + ' /Goal: ' + to_dollars(data.savings_goal)
+            , piggy_banks: 'Balance: ' + to_dollars(data.balance) + ' / Goal: ' + to_dollars(data.savings_goal)
     }[data.object_type] || 'ON'
     if (typeof property === 'undefined') return text
     if ((typeof data[property] === 'undefined') || (data[property] === null)) return ''
