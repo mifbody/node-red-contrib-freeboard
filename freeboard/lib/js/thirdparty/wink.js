@@ -13,13 +13,13 @@ wink.indicator.value = function (data, property) {
 
     if (!data) return false
     if ((typeof data.connection !== 'undefined') && (!data.connection)) return false
-    if ({ cameras: true, remotes: true, sprinklers: true }[data.object_type]) return false
+    if ({remotes: true, sprinklers: true }[data.object_type]) return false
     if (typeof property !== 'undefined') {
         if ((typeof data[property] === 'undefined') || (data[property] === null)) return true
         return {
             sensor_pods: true
                , smoke_detectors: true
-               , thermostats: (property === 'temperature') || (property === 'humidity')
+               , thermostats: (property === 'temperature') || (property === 'humidity') || (property === 'mode')
                , air_conditioners: (property === 'temperature')
                , propane_tanks: (property === 'remaining') || (property === 'battery')
         }[data.object_type] || (property === 'battery')
@@ -40,6 +40,7 @@ wink.indicator.value = function (data, property) {
             , air_conditioners: data.mode !== 'off'
             , unknown_devices: true
             , propane_tanks: true
+            , cameras: data.capturing_video
     }[data.object_type]
     return (typeof value !== 'undefined' ? value : data.powered)
 }
@@ -54,13 +55,11 @@ var on_text = function (data, property) {
 
     if (!data) return ''
     text = {
-              buttons: ''
+        buttons: ''
             , garage_doors: 'OPEN'
             , hubs: (!data.update_needed ? 'OK' : 'UPDATE NEEDED')
             , linked_services: 'OK'
             , light_bulbs: (data.brightness == 1.0 ? '' : pct(data.brightness))
-            , binary_switches: 'ON'
-            , powerstrips: 'ON'
             , locks: 'LOCKED'
             , sensor_pods: 'PROPERTY?'
             , shades: (data.position == 1.0 ? 'OPEN' : pct(data.position))
@@ -70,7 +69,7 @@ var on_text = function (data, property) {
             , propane_tanks: 'OK'
     }[data.object_type] || 'ON'
     if (typeof property === 'undefined') return text
-//    if ((typeof data[property] === 'undefined') || (data[property] === null)) return ''
+    if ((typeof data[property] === 'undefined') || (data[property] === null)) return ''
 
     value = data[property]
     text = {
@@ -93,9 +92,8 @@ var on_text = function (data, property) {
             , humidity: pct(value)
             , smoke_severity: pct(value)
             , remaining: pct(value)
-
-            , temperature: (typeof value === 'number' ? (value.toFixed(1) + 'C / ' + ((value * 1.8) + 32).toFixed(1) + 'F') : '')
-            , max_set_point: (typeof value === 'number' ? (value.toFixed(1) + 'C / ' + ((value * 1.8) + 32).toFixed(1) + 'F') : '')
+            , temperature: dual_temp(value)
+            , mode: tstat_mode(data, value)
     }[property]
     if (text === '') text = 'OK'
 
@@ -106,7 +104,14 @@ var pct = function (value) {
     return ((value > 1.0 ? value : value * 100).toFixed(0) + '%')
 }
 
+var dual_temp = function (value) {
+    return (typeof value === 'number' ? (value.toFixed(1) + 'C / ' + ((value * 1.8) + 32).toFixed(1) + 'F') : '')
+}
 
+var tstat_mode = function (data, value) {
+    //    return value
+    return (value == 'cool_only' ? 'cool to: ' + dual_temp(data.min_set_point) : value == 'heat_only' ? 'heat to: ' + dual_temp(data.max_set_point) : 'auto: ' + dual_temp(data.min_set_point) + ' - ' + dual_temp(data.max_set_point))
+}
 wink.indicator.off_text = function (data, property) {
     return off_text(data, property)
 }
@@ -154,6 +159,8 @@ var style_element = function (data, property) {
 
     color = {
         binary_switches: (data.powered ? white : black)
+            , cameras: (data.capturing_video ? green : data.connection ? blue : black)
+            , outlet: (data.powered ? white : black)
             , buttons: (!data.pressed ? blue : green)
             , garage_doors: (data.position === 0.0 ? blue : yellow)
             , hubs: (!data.update_needed ? blue : yellow)
