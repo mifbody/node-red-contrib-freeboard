@@ -13,12 +13,13 @@ wink.indicator.value = function (data, property) {
 
     if (!data) return false
     if ((typeof data.connection !== 'undefined') && (!data.connection)) return false
-    if ({remotes: true, sprinklers: true }[data.object_type]) return false
+    if ({ remotes: true, sprinklers: true }[data.object_type]) return false
     if (typeof property !== 'undefined') {
         if ((typeof data[property] === 'undefined') || (data[property] === null)) return true
         return {
             sensor_pods: true
                , smoke_detectors: true
+               , piggy_banks: true
                , thermostats: (property === 'temperature') || (property === 'humidity') || (property === 'mode')
                , air_conditioners: (property === 'temperature')
                , propane_tanks: (property === 'remaining') || (property === 'battery')
@@ -40,6 +41,7 @@ wink.indicator.value = function (data, property) {
             , air_conditioners: data.mode !== 'off'
             , unknown_devices: true
             , propane_tanks: true
+            , piggy_banks: true
             , cameras: data.capturing_video
     }[data.object_type]
     return (typeof value !== 'undefined' ? value : data.powered)
@@ -67,6 +69,7 @@ var on_text = function (data, property) {
             , thermostats: (data.cool_active ? 'COOL' : data.heat_active ? 'HEAT' : data.aux_active ? 'AUX' : data.fan_active ? 'FAN' : 'IDLE')
             , air_conditioners: (data.powered ? ('COOL to ' + (data.max_set_point.toFixed(1) + 'C / ' + ((data.max_set_point * 1.8) + 32).toFixed(1) + 'F')) : 'IDLE')
             , propane_tanks: 'OK'
+            , piggy_banks: 'Balance: ' + to_dollars(data.balance) + ' /Goal: ' + to_dollars(data.savings_goal)
     }[data.object_type] || 'ON'
     if (typeof property === 'undefined') return text
     if ((typeof data[property] === 'undefined') || (data[property] === null)) return ''
@@ -102,6 +105,10 @@ var on_text = function (data, property) {
 
 var pct = function (value) {
     return ((value > 1.0 ? value : value * 100).toFixed(0) + '%')
+}
+
+var to_dollars = function (value) {
+    return (typeof value === 'number' ? (value / 100).toFixed(2) : '')
 }
 
 var dual_temp = function (value) {
@@ -170,6 +177,7 @@ var style_element = function (data, property) {
             , thermostats: ({ cool_only: blue, heat_only: red }[data.mode] || green)
             , air_conditioners: (data.powered ? blue : green)
             , propane_tanks: (data.remaining == 0 ? red : data.remaining == 1 ? blue : data.remaining > 0.66 ? green : data.remaining > 0.33 ? yellow : red)
+            , piggy_banks: '#'+data.nose_color
     }[data.object_type] || blue
 
     if (typeof property === 'undefined') return { color: color, shape: shape }
