@@ -8,7 +8,7 @@ var head=
   '                      freeboard.initialize(true);\n'+
   '                      var hash = window.location.hash;\n'+
   '                      if (hash !== null) {\n'+
-  '                          $.get("/freeboard_api/dashboard/"+hash.substring(1), function(data) {\n'+
+  '                          $.get("/freeboard/dashboard/"+hash.substring(1), function(data) {\n'+
   '							var datap=JSON.parse(data);\n'+
   '							if (!datap.empty){\n'+
   '								freeboard.loadDashboard(datap, function() {\n'+
@@ -21,12 +21,12 @@ var head=
   '	            });\n'+
   '	</script>';
   
-fs.readFile('freeboard/index.html' , 'utf8', function (err,data) {
+fs.readFile('node_modules/freeboard/index.html' , 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
   var result = data.replace(/head.js[\s\S]*?<\/script>/g, head);
-  fs.writeFile('freeboard/index.html', result, 'utf8', function (err) {
+  fs.writeFile('node_modules/freeboard/index.html', result, 'utf8', function (err) {
      if (err) return console.log(err);
   });
 });
@@ -46,7 +46,7 @@ var saveDashboard=
 	'	var a = document.createElement("a");\n'+
 	'	$.ajax({\n'+
 	'		type:"POST",\n'+
-	'		url:"../freeboard_api/dashboard",\n'+
+	'		url:"../freeboard/dashboard",\n'+
 	'		data:{\n'+
 	'			content:pretty?JSON.stringify(self.serialize(), null, "\t"):JSON.stringify(self.serialize()),\n'+
 	'			name:hash\n'+
@@ -56,12 +56,12 @@ var saveDashboard=
 	'	});\n'+
 	'}\n';
 
-fs.readFile('freeboard/js/freeboard.js' , 'utf8', function (err,data) {
+fs.readFile('node_modules/freeboard/js/freeboard.js' , 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
   var result = data.replace(/this\.saveDashboard =[\s\S]*?a\.click[\s\S]*?\}/g, saveDashboard);
-  fs.writeFile('freeboard/js/freeboard.js', result, 'utf8', function (err) {
+  fs.writeFile('node_modules/freeboard/js/freeboard.js', result, 'utf8', function (err) {
      if (err) return console.log(err);
   });
 });
