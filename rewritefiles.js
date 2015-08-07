@@ -21,12 +21,12 @@ var head=
   '	            });\n'+
   '	</script>';
   
-fs.readFile('node_modules/freeboard/index.html' , 'utf8', function (err,data) {
+fs.readFile('freeboard/index.html' , 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
   var result = data.replace(/head.js[\s\S]*?<\/script>/g, head);
-  fs.writeFile('node_modules/freeboard/index.html', result, 'utf8', function (err) {
+  fs.writeFile('freeboard/index.html', result, 'utf8', function (err) {
      if (err) return console.log(err);
   });
 });
@@ -56,12 +56,12 @@ var saveDashboard=
 	'	});\n'+
 	'}\n';
 
-fs.readFile('node_modules/freeboard/js/freeboard.js' , 'utf8', function (err,data) {
+fs.readFile('freeboard/js/freeboard.js' , 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
   var result = data.replace(/this\.saveDashboard =[\s\S]*?a\.click[\s\S]*?\}/g, saveDashboard);
-  fs.writeFile('node_modules/freeboard/js/freeboard.js', result, 'utf8', function (err) {
+  fs.writeFile('freeboard/js/freeboard.js', result, 'utf8', function (err) {
      if (err) return console.log(err);
   });
 });
