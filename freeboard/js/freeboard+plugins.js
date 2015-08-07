@@ -1527,6 +1527,7 @@ PluginEditor = function(jsEditor, valueEditor)
 					{
 						newSettings.settings[settingDef.name] = currentSettingsValues[settingDef.name];
 
+						var onOffSwitch = $('<div class="onoffswitch"><label class="onoffswitch-label" for="' + settingDef.name + '-onoff"><div class="onoffswitch-inner"><span class="on">YES</span><span class="off">NO</span></div><div class="onoffswitch-switch"></div></label></div>').appendTo(valueCell);
 
 						var input = $('<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="' + settingDef.name + '-onoff">').prependTo(onOffSwitch).change(function()
 						{
