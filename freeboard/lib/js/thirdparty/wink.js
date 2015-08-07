@@ -148,6 +148,28 @@ wink.indicator.style_element = function(data, property) {
     return ('<div class="wink-indicator-'     + params.shape + '" style="background-color:'  + params.color + ';"></div>')
 }
 
+
+DynCol =function (hex, lum) {
+
+	// validate hex string
+	hex = String(hex).replace(/[^0-9a-f]/gi, '');
+	if (hex.length < 6) {
+		hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+	}
+	lum = lum || 0;
+
+	// convert to decimal and change luminosity
+	var rgb = "#", c, i;
+	for (i = 0; i < 3; i++) {
+		c = parseInt(hex.substr(i*2,2), 16);
+		c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+		rgb += ("00"+c).substr(c.length);
+	}
+	 console.log(lum);
+	 console.log(rgb);
+	return rgb;
+}
+
 var style_element = function(data, property) {
     var color, value
       , black  = '#000000'
@@ -167,7 +189,7 @@ var style_element = function(data, property) {
             , buttons         : (!data.pressed         ? blue  : green)
             , garage_doors    : (data.position === 0.0 ? blue  : yellow)
             , hubs            : (!data.update_needed   ? blue  : yellow)
-            , light_bulbs     : (data.powered          ? white : black)
+            , light_bulbs     : (data.powered          ? DynCol("#905030",data.brightness*5) : black)
             , locks           : (data.locked           ? blue  : yellow)
             , shades          : (data.position === 0.0 ? blue  : data.position === null ? yellow : green)
             , thermostats     : ({ cool_only: blue, heat_only: red }[data.mode] || green)
