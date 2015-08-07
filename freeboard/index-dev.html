@@ -22,6 +22,7 @@
                 "lib/js/thirdparty/jquery.caret.js",
 				"lib/js/thirdparty/codemirror.js",
 				"lib/js/thirdparty/jquery.xdomainrequest.js",
+		                "lib/js/thirdparty/wink.js"
 
                 "lib/js/freeboard/freeboardModel.js",
                 "lib/js/freeboard/datasourceModel.js",
@@ -38,8 +39,6 @@
                 "plugins/freeboard/freeboard.datasources.js",
                 "plugins/freeboard/freeboard.widgets.js",
                 "examples/plugin_example.js",
-
-                "lib/js/thirdparty/wink.js",
 
                 // *** Load more plugins here ***
                 function(){
@@ -67,7 +66,11 @@
                 <div id="board-actions">
                     <ul class="board-toolbar vertical">
                         <li data-bind="click: loadDashboardFromLocalFile"><i id="full-screen-icon" class="icon-folder-open icon-white"></i><label id="full-screen">Load Freeboard</label></li>
-                        <li data-bind="click: saveDashboard"><i class="icon-download-alt icon-white"></i><label>Save Freeboard</label></li>
+                        <li><i class="icon-download-alt icon-white"></i>
+                            <label data-bind="click: saveDashboardClicked">Save Freeboard</label>
+                            <label style="display: none;" data-bind="click: saveDashboard" data-pretty="true">[Pretty]</label>
+                            <label style="display: none;" data-bind="click: saveDashboard" data-pretty="false">[Minified]</label>
+                        </li>
                         <li id="add-pane" data-bind="click: createPane"><i class="icon-plus icon-white"></i><label>Add Pane</label></li>
                     </ul>
                 </div>
