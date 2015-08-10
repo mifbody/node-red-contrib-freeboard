@@ -114,7 +114,7 @@ var dollars = function (value) {
 var tstat_mode = function (data, value) {
     //    return value
     if (data.users_away) return 'Away mode'
-    return (value == 'cool_only' ? 'cool to: ' + dual_temp(data.min_set_point) : value == 'heat_only' ? 'heat to: ' + dual_temp(data.max_set_point) : 'auto: ' + dual_temp(data.min_set_point) + ' - ' + dual_temp(data.max_set_point))
+    return (value == 'cool_only' ? 'cool to: ' + dual_temp(data.max_set_point) : value == 'heat_only' ? 'heat to: ' + dual_temp(data.min_set_point) : 'auto: ' + dual_temp(data.min_set_point) + ' - ' + dual_temp(data.max_set_point))
 }
 
 
