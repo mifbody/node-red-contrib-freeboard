@@ -33,7 +33,7 @@ wink.indicator.value = function(data, property) {
             , sensor_pods     : true
             , shades          : data.position > 0
             , smoke_detectors : true
-            , thermostats     : data.mode !== 'off'
+            , thermostats     : data.powered
             , air_conditioners: data.mode !== 'off'
             , unknown_devices: true
             , propane_tanks: true
