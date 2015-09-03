@@ -219,7 +219,7 @@ var style_element = function(data, property) {
             , co_severity     : (value > 0) && red
             , humidity        : false
             , smoke_severity  : (value > 0) && red
-	    , mode	      : (data.powered ? black : data.users_away ? green : value=='cool_only' ? blue : red)
+	    , mode	      : (value=='cool_only' ? blue : red)
             , temperature     : false
             }[property] || blue
     if ((color != blue) && (color != green)) shape = 'triangle'
