@@ -169,7 +169,7 @@
                 return $('<div class="modal fade" tabindex="-1"><style>.modal-xl{width:96%;}</style>'
                 + '<div class=modal-dialog>'
                 + '<div class=modal-content>'
-                + ' <div class=modal-header><button type=button class="x close" data-dismiss=modal><span aria-hidden=true>&times;</span><span class=sr-only>Close</span></button><h4 class=modal-title></h4></div>'
+                + ' <div class=modal-header><button type=button class="close" data-dismiss=modal>x</button><h4 class=modal-title></h4></div>'
                 + '</div>'
                 + '</div>'
                 + '</div>')
