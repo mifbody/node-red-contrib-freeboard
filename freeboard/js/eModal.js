@@ -47,7 +47,7 @@
             allowContentRecycle: true,
             confirmLabel: 'OK',
             size: empty,
-            loadingHtml: '<h5>Loading...</h5><div class=progress><div class="progress-bar progress-bar-success active" style="width: 100%"></div></div>',
+            loadingHtml: '<h5>Loading...</h5><div class=progress progress-stripped active><div class="progress-bar progress-bar-success" style="width: 100%"></div></div>',
             title: 'Attention'
         };
 
