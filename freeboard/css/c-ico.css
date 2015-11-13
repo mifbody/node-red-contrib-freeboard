@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('../fonts/icomoon.eot?e7nwe3');
-	src:url('../fonts/icomoon.eot?e7nwe3#iefix') format('embedded-opentype'),
-		url('../fonts/icomoon.ttf?e7nwe3') format('truetype'),
-		url('../fonts/icomoon.woff?e7nwe3') format('woff'),
-		url('../fonts/icomoon.svg?e7nwe3#icomoon') format('svg');
+	src:url('../fonts/icomoon.eot?p3rm9t');
+	src:url('../fonts/icomoon.eot?p3rm9t#iefix') format('embedded-opentype'),
+		url('../fonts/icomoon.ttf?p3rm9t') format('truetype'),
+		url('../fonts/icomoon.woff?p3rm9t') format('woff'),
+		url('../fonts/icomoon.svg?p3rm9t#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,6 +23,9 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.cicon-doors4:before {
+	content: "\e904";
+}
 .cicon-closed_door:before {
 	content: "\1f301";
 }
@@ -31,5 +34,17 @@
 }
 .cicon-CO2:before {
 	content: "\1f302";
+}
+.cicon-droplet:before {
+	content: "\e900";
+}
+.cicon-feed:before {
+	content: "\e901";
+}
+.cicon-fire:before {
+	content: "\e902";
+}
+.cicon-bulb:before {
+	content: "\e903";
 }
 
