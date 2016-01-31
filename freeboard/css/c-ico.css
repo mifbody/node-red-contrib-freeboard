@@ -24,31 +24,30 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-doors4:before {
+.cicon-doors4:before {
     content: "\e904";
 }
-.icon-closed_door:before {
+.cicon-closed_door:before {
     content: "\1f301";
 }
-.icon-opened_door:before {
+.cicon-opened_door:before {
     content: "\1f300";
 }
-.icon-CO2:before {
+.cicon-CO2:before {
     content: "\1f302";
 }
-.icon-bulb:before {
+.cicon-bulb:before {
     content: "\e903";
 }
-.icon-droplet:before {
+.cicon-droplet:before {
     content: "\e900";
 }
-.icon-feed:before {
+.cicon-feed:before {
     content: "\e901";
 }
-.icon-fire:before {
+.cicon-fire:before {
     content: "\e902";
 }
-.icon-propane_tnk:before {
+.cicon-propane_tnk:before {
     content: "\e905";
 }
-
