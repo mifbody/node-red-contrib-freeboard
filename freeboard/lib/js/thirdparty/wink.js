@@ -76,7 +76,7 @@ var on_text = function(data, property) {
             , loudness        : (value ? 'LOUD'            : '')
             , noise           : (value ? 'NOISY'           : '')
             , motion          : (value ? 'MOTION'          : '')
-            , occupied        : (value ? 'OCCUPIED'        : 'NOT OCCUPIED')
+            , occupied        : (value ? 'OCCUPIED'        : '')
             , opened          : (value ? 'OPEN'            : 'CLOSED')
             , presence        : (value ? 'PRESENCE'        : '')
             , smoke_detected  : (value ? 'SMOKE DETECTED'  : '')
@@ -196,7 +196,7 @@ var style_element = function(data, property) {
             , air_conditioners: (data.powered ? blue : green)
             , propane_tanks   : (data.remaining == 0 ? red : data.remaining == 1 ? blue : data.remaining > 0.66 ? green : data.remaining > 0.33 ? yellow : red)
             , piggy_banks     : '#'+data.nose_color
-            }[data.object_type] || green
+            }[data.object_type] || blue
 
     if (typeof property === 'undefined') return { color: color, shape: shape }
     if ((typeof data[property] === 'undefined') || (data[property] === null )) return ''
@@ -223,7 +223,7 @@ var style_element = function(data, property) {
             , smoke_severity  : (value > 0) && red
 	    , mode	      : (value=='cool_only' ? blue : red)
             , temperature     : false
-            }[property] || green
+            }[property] || blue
     if ((color != blue) && (color != green)) shape = 'triangle'
 
     return { color: color, shape: shape }
