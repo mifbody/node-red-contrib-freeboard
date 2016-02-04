@@ -76,7 +76,7 @@ var on_text = function(data, property) {
             , loudness        : (value ? 'LOUD'            : '')
             , noise           : (value ? 'NOISY'           : '')
             , motion          : (value ? 'MOTION'          : '')
-            , occupied : (value ? 'OCCUPIED'        : '')
+            , occupied : (value ? 'OCCUPIED'        : 'VACANT')
             , opened          : (value ? 'OPEN'            : 'CLOSED')
             , presence        : (value ? 'PRESENCE'        : '')
             , smoke_detected  : (value ? 'SMOKE DETECTED'  : '')
@@ -95,7 +95,7 @@ var on_text = function(data, property) {
 	    , mode	      : tstat_mode(data,value)
 
             }[property]
-    if (text === '') text = 'O.K.'
+    if (text === '') text = 'OK'
 
     return text
 }
