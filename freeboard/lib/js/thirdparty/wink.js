@@ -95,7 +95,7 @@ var on_text = function(data, property) {
 	    , mode	      : tstat_mode(data,value)
 
             }[property]
-    if (text === '') text = 'OK'
+    if (text === '') text = 'O.K.'
 
     return text
 }
