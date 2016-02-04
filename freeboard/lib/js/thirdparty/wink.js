@@ -196,7 +196,7 @@ var style_element = function(data, property) {
             , air_conditioners: (data.powered ? blue : green)
             , propane_tanks   : (data.remaining == 0 ? red : data.remaining == 1 ? blue : data.remaining > 0.66 ? green : data.remaining > 0.33 ? yellow : red)
             , piggy_banks     : '#'+data.nose_color
-            }[data.object_type] || blue
+            }[data.object_type] || green
 
     if (typeof property === 'undefined') return { color: color, shape: shape }
     if ((typeof data[property] === 'undefined') || (data[property] === null )) return ''
