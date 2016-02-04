@@ -76,7 +76,7 @@ var on_text = function(data, property) {
             , loudness        : (value ? 'LOUD'            : '')
             , noise           : (value ? 'NOISY'           : '')
             , motion          : (value ? 'MOTION'          : '')
-            , occupied        : (value ? 'OCCUPIED'        : '')
+            , occupied        : (value ? 'OCCUPIED'        : 'NOT OCCUPIED')
             , opened          : (value ? 'OPEN'            : 'CLOSED')
             , presence        : (value ? 'PRESENCE'        : '')
             , smoke_detected  : (value ? 'SMOKE DETECTED'  : '')
