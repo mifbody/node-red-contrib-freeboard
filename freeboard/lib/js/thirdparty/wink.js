@@ -223,7 +223,7 @@ var style_element = function(data, property) {
             , smoke_severity  : (value > 0) && red
 	    , mode	      : (value=='cool_only' ? blue : red)
             , temperature     : false
-            }[property] || blue
+            }[property] || green
     if ((color != blue) && (color != green)) shape = 'triangle'
 
     return { color: color, shape: shape }
